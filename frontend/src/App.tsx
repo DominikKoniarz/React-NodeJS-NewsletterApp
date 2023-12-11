@@ -1,18 +1,15 @@
-import Header from "./page/Header";
-import HeaderIcon from "./page/HeaderIcon";
-import Form from "./page/Form";
-import Footer from "./page/Footer";
+import { BrowserRouter, Routes, Route } from "react-router-dom";
+import RootPage from "./page/RootPage/RootPage";
+import NotFound from "./page/404/NotFound";
 
 function App() {
   return (
-    <main className="flex items-center justify-center w-screen h-screen bg-color1">
-      <div className="relative p-12 mx-auto border border-none bg-boxColor rounded-2xl ">
-        <HeaderIcon />
-        <Header />
-        <Form />
-        <Footer />
-      </div>
-    </main>
+    <BrowserRouter>
+      <Routes>
+        <Route path="/" element={<RootPage />} />
+        <Route path="*" element={<NotFound />} />
+      </Routes>
+    </BrowserRouter>
   );
 }
 

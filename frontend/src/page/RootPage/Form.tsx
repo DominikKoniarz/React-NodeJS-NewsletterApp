@@ -2,12 +2,66 @@ import { useState } from "react";
 import FormInputLabel from "./FormInputLabel";
 import FormInput from "./FormInput";
 import SubscribeButton from "./SubscribeButton";
-const Form = () => {
+import { REGISTER_URL } from "../../constants";
+
+type NewNewsletterUser = {
+  email: string;
+  name: string;
+};
+
+type RegisterRequest = {
+  message: string;
+};
+
+type Props = {
+  fetchError: string;
+  setFetchError: React.Dispatch<React.SetStateAction<string>>;
+  setIsLoading: React.Dispatch<React.SetStateAction<boolean>>;
+};
+
+const Form = ({ setIsLoading, fetchError, setFetchError }: Props) => {
   const [email, setEmail] = useState<string>("");
   const [name, setName] = useState<string>("");
 
+  const handleSubmit = async (email: string, name: string) => {
+    console.log(email, name);
+    try {
+      const data: NewNewsletterUser = { email, name };
+      setFetchError("");
+      setIsLoading(true);
+      const response = await fetch(REGISTER_URL, {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(data),
+      });
+      if (!response.ok) {
+        const json = (await response.json()) as RegisterRequest;
+
+        throw new Error(`Register Error ${json.message}`);
+      }
+      setFetchError("");
+    } catch (err: Error | unknown) {
+      if (err instanceof Error) {
+        setFetchError(err.message);
+        console.log(err.message);
+      } else {
+        console.log(err);
+      }
+    } finally {
+      setIsLoading(false);
+    }
+  };
+  console.log(fetchError);
   return (
-    <form className="mt-2" onSubmit={(e) => e.preventDefault()}>
+    <form
+      className="mt-2"
+      onSubmit={(e) => {
+        e.preventDefault();
+        handleSubmit(email, name);
+      }}
+    >
       <div className="flex gap-3">
         <FormInputLabel htmlFor="name-input" text="Name" />
         <FormInput
@@ -27,6 +81,9 @@ const Form = () => {
         />
         <SubscribeButton />
       </div>
+      {fetchError && (
+        <p className="pt-4 mx-auto text-red-500 w-fit">{fetchError}</p>
+      )}
     </form>
   );
 };

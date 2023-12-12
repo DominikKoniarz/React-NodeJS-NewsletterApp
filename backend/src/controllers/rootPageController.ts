@@ -1,4 +1,4 @@
-import type { Request, Response } from "express";
+import type { NextFunction, Request, Response } from "express";
 import path from "path";
 
 const INDEX_FILE_PATH = path.join(
@@ -9,8 +9,16 @@ const INDEX_FILE_PATH = path.join(
 	"index.html"
 );
 
-const rootPageController = (req: Request, res: Response) => {
-	res.sendFile(INDEX_FILE_PATH);
+const rootPageController = (
+	req: Request,
+	res: Response,
+	next: NextFunction
+) => {
+	try {
+		res.sendFile(INDEX_FILE_PATH);
+	} catch (error: Error | unknown) {
+		next(error);
+	}
 };
 
 export default rootPageController;

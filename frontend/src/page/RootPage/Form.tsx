@@ -24,7 +24,6 @@ const Form = ({ setIsLoading, fetchError, setFetchError }: Props) => {
 	const [name, setName] = useState<string>("");
 
 	const handleSubmit = async (email: string, name: string) => {
-		console.log(email, name);
 		try {
 			const data: NewNewsletterUser = { email, name };
 			setFetchError("");

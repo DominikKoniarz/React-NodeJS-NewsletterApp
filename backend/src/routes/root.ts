@@ -1,8 +1,8 @@
 import express from "express";
 import rootPageController from "../controllers/rootPageController";
 
-const router = express.Router();
+const rootRouter = express.Router();
 
-router.get("/", rootPageController);
+rootRouter.get("/", rootPageController);
 
-export default router;
+export default rootRouter;

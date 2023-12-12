@@ -3,6 +3,7 @@ import FormInputLabel from "./FormInputLabel";
 import FormInput from "./FormInput";
 import SubscribeButton from "./SubscribeButton";
 import { REGISTER_URL } from "../../constants";
+import { useNavigate } from "react-router-dom";
 
 type NewNewsletterUser = {
 	email: string;
@@ -11,6 +12,10 @@ type NewNewsletterUser = {
 
 type RegisterRequest = {
 	message: string;
+};
+
+export type Submitted = {
+	submit?: boolean;
 };
 
 type Props = {
@@ -22,6 +27,8 @@ type Props = {
 const Form = ({ setIsLoading, fetchError, setFetchError }: Props) => {
 	const [email, setEmail] = useState<string>("");
 	const [name, setName] = useState<string>("");
+
+	const navigate = useNavigate();
 
 	const handleSubmit = async (email: string, name: string) => {
 		try {
@@ -40,6 +47,8 @@ const Form = ({ setIsLoading, fetchError, setFetchError }: Props) => {
 
 				throw new Error(`Error: ${json.message}`);
 			}
+			const state: Submitted = { submit: true };
+			navigate("/submitted", { state });
 			setFetchError("");
 		} catch (err: Error | unknown) {
 			if (err instanceof Error) {

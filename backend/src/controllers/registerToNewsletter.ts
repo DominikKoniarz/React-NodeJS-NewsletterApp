@@ -54,7 +54,7 @@ const registerToNewsletter = async (
 
 		res.sendStatus(201);
 	} catch (error: Error | unknown) {
-		next(error instanceof Error ? error : "Unknown error!");
+		next(error instanceof Error ? error : "Unknown newsletter register error!");
 	}
 };
 

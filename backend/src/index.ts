@@ -9,6 +9,7 @@ import staticAssets from "./routes/assets";
 import registerRouter from "./routes/register";
 import cors from "cors";
 import corsConfig from "./config/corsConfig";
+import unregisterRouter from "./routes/unregister";
 
 const PORT = process.env.PORT || "3000";
 
@@ -23,6 +24,7 @@ if (process.env.NODE_ENV === "production") {
 }
 
 app.use("/register", registerRouter);
+app.use("/unregister", unregisterRouter);
 
 app.use("*", notFoundRouter);
 

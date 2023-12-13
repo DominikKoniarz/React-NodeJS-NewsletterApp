@@ -17,7 +17,7 @@ const rootPageController = (
 	try {
 		res.sendFile(INDEX_FILE_PATH);
 	} catch (error: Error | unknown) {
-		next(error);
+		next(error instanceof Error ? error : "Unknown root page error!");
 	}
 };
 

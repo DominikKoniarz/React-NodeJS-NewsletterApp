@@ -29,6 +29,15 @@ const registerToNewsletter = async (
 		return res.status(403).json({ message: "Valid email required!" });
 
 	try {
+		const foundUser = await prisma.user.findFirst({
+			where: { email },
+		});
+
+		if (foundUser)
+			return res
+				.status(403)
+				.json({ message: "You are already registered to our newsletter!" });
+
 		await prisma.user.create({
 			data: {
 				name,

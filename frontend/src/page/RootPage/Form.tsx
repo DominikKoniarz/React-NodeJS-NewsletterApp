@@ -70,7 +70,7 @@ const Form = ({ setIsLoading, fetchError, setFetchError }: Props) => {
 				handleSubmit(email, name);
 			}}
 		>
-			<div className="flex gap-3">
+			<div className="flex flex-col items-center gap-y-4 md:gap-3 md:flex-row">
 				<FormInputLabel htmlFor="name-input" text="Name" />
 				<FormInput
 					placeholder="Your name here"

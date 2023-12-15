@@ -6,9 +6,9 @@ const errorHandler = (
 	res: Response,
 	next: NextFunction
 ) => {
+	console.log(error.message);
 	if (process.env.NODE_ENV !== "production") {
 		res.status(500).json({ message: `Server error: ${error.message}` });
-		console.log(error.stack);
 		return;
 	} else {
 		res.status(500).json({ message: "Server error" });

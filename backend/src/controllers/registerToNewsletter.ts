@@ -2,6 +2,7 @@ import { NextFunction, Request, Response } from "express";
 import { validate } from "email-validator";
 import prisma from "../initializers/initDb";
 import nodemailer from "nodemailer";
+import generateEmailHTML from "../helpers/generateEmailHTML";
 
 const transporter = nodemailer.createTransport({
 	host: process.env.MAIL_HOST,
@@ -49,7 +50,7 @@ const registerToNewsletter = async (
 			from: process.env.MAIL_SENDER_EMAIL,
 			to: email,
 			subject: `Congratulations ${name}! You were successfully registered to our newsletter!`,
-			html: "<b>Test!</b>",
+			html: generateEmailHTML(name, email),
 		});
 
 		res.sendStatus(201);

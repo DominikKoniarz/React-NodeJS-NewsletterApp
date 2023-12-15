@@ -3,6 +3,6 @@ import rootPageController from "../controllers/rootPageController";
 
 const rootRouter = express.Router();
 
-rootRouter.get("/", rootPageController);
+rootRouter.get(["/", "/unsign", "/submitted"], rootPageController);
 
 export default rootRouter;

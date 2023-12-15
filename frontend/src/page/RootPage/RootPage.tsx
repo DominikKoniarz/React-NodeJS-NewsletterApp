@@ -5,30 +5,30 @@ import Footer from "./Footer";
 import { useState } from "react";
 
 const RootPage = () => {
-	const [fetchError, setFetchError] = useState<string>("");
-	const [isLoading, setIsLoading] = useState<boolean>(false);
+  const [fetchError, setFetchError] = useState<string>("");
+  const [isLoading, setIsLoading] = useState<boolean>(false);
 
-	return (
-		<main className="grid w-full h-full p-5 place-items-center bg-color1">
-			<div className="relative p-10 mx-auto border border-none bg-boxColor rounded-2xl w-fit">
-				{!isLoading ? (
-					<>
-						<HeaderIcon />
-						<Header />
-						<Form
-							setIsLoading={setIsLoading}
-							fetchError={fetchError}
-							setFetchError={setFetchError}
-						/>
-						<Footer />
-					</>
-				) : (
-					<div className="grid w-20 h-20 place-items-center">
-						<div className="w-full h-full border-[12px] rounded-full border-cyan-600 border-t-slate-200 animate-spin"></div>
-					</div>
-				)}
-			</div>
-		</main>
-	);
+  return (
+    <main className="grid w-full h-full p-5 place-items-center bg-color1">
+      <div className="relative p-10 mx-auto border border-none bg-boxColor rounded-2xl w-fit">
+        {!isLoading ? (
+          <>
+            <HeaderIcon />
+            <Header />
+            <Form
+              setIsLoading={setIsLoading}
+              fetchError={fetchError}
+              setFetchError={setFetchError}
+            />
+            <Footer />
+          </>
+        ) : (
+          <div className="grid w-20 h-20 place-items-center">
+            <div className="w-full h-full border-[12px] rounded-full border-cyan-600 border-t-slate-200 animate-spin"></div>
+          </div>
+        )}
+      </div>
+    </main>
+  );
 };
 export default RootPage;

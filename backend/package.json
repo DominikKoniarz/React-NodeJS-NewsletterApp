@@ -10,7 +10,12 @@
 	},
 	"scripts": {
 		"dev": "nodemon --watch .env --watch src --exec ts-node src/index.ts",
-		"build": "tsc"
+		"build": "tsc",
+		"start": "pm2 start dist/index.js --name newsletterapp-server",
+		"server:delete": "pm2 delete newsletterapp-server",
+		"pm2:list": "pm2 list",
+		"pm2:log": "pm2 log",
+		"pm2:logs": "pm2 logs"
 	},
 	"keywords": [],
 	"author": "",

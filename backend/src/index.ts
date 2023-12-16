@@ -10,7 +10,6 @@ import registerRouter from "./routes/register";
 import cors from "cors";
 import corsConfig from "./config/corsConfig";
 import unregisterRouter from "./routes/unregister";
-import path from "path";
 
 const PORT = process.env.PORT || "3000";
 
